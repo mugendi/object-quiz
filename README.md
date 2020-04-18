@@ -105,7 +105,7 @@ You can use any of theseto check your object values.
 
 Num | Checker | Shorthand
 --- | --- | ---
-1. | is.not.arguments | not.arguments
+1.|is.not.arguments|not.arguments
 2. | is.not.array | not.array
 3. | is.not.boolean | not.boolean
 4. | is.not.char | not.char
