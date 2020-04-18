@@ -1,0 +1,28 @@
+{
+  "name": "object-quiz",
+  "version": "0.0.1",
+  "main": "index.js",
+  "license": "MIT",
+  "dependencies": {
+    "escape-string-regexp": "^3.0.0",
+    "is_js": "^0.9.0"
+  },
+  "description": "When you need to query those deep JSON objects in over 300+ ways! just Quiz them!",
+  "directories": {
+    "lib": "lib"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "jest"
+  },
+  "keywords": [
+    "object",
+    "query",
+    "json",
+    "keys",
+    "values",
+    "inspect",
+    "deep"
+  ],
+  "author": "Anthony Mugendi <ngurumugz@gmail.com>"
+}
