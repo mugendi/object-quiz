@@ -143,8 +143,8 @@ You can use any of these to check your object values.
 ### Custom Checkers
 - **it.does.contain** : ```eq.quiz("path", "it.does.contain", "value")```
 - **it.does.not.contain** : ```eq.quiz("path", "it.does.not.contain", "value")```
-- **it.is.contained** : ```eq.quiz("path", "it.is.contained", "value")```
-- **it.is.not.contained** : ```eq.quiz("path", "it.is.not.contained", "value")```
+- **it.is.contained** : ```eq.quiz("path", "it.is.contained", [array/object])```
+- **it.is.not.contained** : ```eq.quiz("path", "it.is.not.contained", [array/object])```
 - **has.size** : ```eq.quiz("path", "has.size", 4)```
 
 
