@@ -97,363 +97,370 @@ This is the main function that performs all the magic.
 - **expected:** Optional. Used for equality matches. This is the value that is checked against. 
 
 # Available checkers 
-You can use any of theseto check your object values.
+You can use any of these to check your object values.
 
-Num|Checker|Shorthand
----|---|---
-1.|is.not.arguments|not.arguments
-2.|is.not.array|not.array
-3.|is.not.boolean|not.boolean
-4.|is.not.char|not.char
-5.|is.not.date|not.date
-6.|is.not.domNode|not.domNode
-7.|is.not.error|not.error
-8.|is.not.function|not.function
-9.|is.not.json|not.json
-10.|is.not.nan|not.nan
-11.|is.not.null|not.null
-12.|is.not.number|not.number
-13.|is.not.object|not.object
-14.|is.not.regexp|not.regexp
-15.|is.not.sameType|not.sameType
-16.|is.not.string|not.string
-17.|is.not.undefined|not.undefined
-18.|is.not.windowObject|not.windowObject
-19.|is.not.empty|not.empty
-20.|is.not.existy|not.existy
-21.|is.not.falsy|not.falsy
-22.|is.not.truthy|not.truthy
-23.|is.not.above|not.above
-24.|is.not.decimal|not.decimal
-25.|is.not.equal|not.equal
-26.|is.not.even|not.even
-27.|is.not.finite|not.finite
-28.|is.not.infinite|not.infinite
-29.|is.not.integer|not.integer
-30.|is.not.negative|not.negative
-31.|is.not.odd|not.odd
-32.|is.not.positive|not.positive
-33.|is.not.under|not.under
-34.|is.not.within|not.within
-35.|is.not.affirmative|not.affirmative
-36.|is.not.alphaNumeric|not.alphaNumeric
-37.|is.not.caPostalCode|not.caPostalCode
-38.|is.not.creditCard|not.creditCard
-39.|is.not.dateString|not.dateString
-40.|is.not.email|not.email
-41.|is.not.eppPhone|not.eppPhone
-42.|is.not.hexadecimal|not.hexadecimal
-43.|is.not.hexColor|not.hexColor
-44.|is.not.ipv4|not.ipv4
-45.|is.not.ipv6|not.ipv6
-46.|is.not.nanpPhone|not.nanpPhone
-47.|is.not.socialSecurityNumber|not.socialSecurityNumber
-48.|is.not.timeString|not.timeString
-49.|is.not.ukPostCode|not.ukPostCode
-50.|is.not.url|not.url
-51.|is.not.usZipCode|not.usZipCode
-52.|is.not.ip|not.ip
-53.|is.not.capitalized|not.capitalized
-54.|is.not.endWith|not.endWith
-55.|is.not.include|not.include
-56.|is.not.lowerCase|not.lowerCase
-57.|is.not.palindrome|not.palindrome
-58.|is.not.space|not.space
-59.|is.not.startWith|not.startWith
-60.|is.not.upperCase|not.upperCase
-61.|is.not.day|not.day
-62.|is.not.dayLightSavingTime|not.dayLightSavingTime
-63.|is.not.future|not.future
-64.|is.not.inDateRange|not.inDateRange
-65.|is.not.inLastMonth|not.inLastMonth
-66.|is.not.inLastWeek|not.inLastWeek
-67.|is.not.inLastYear|not.inLastYear
-68.|is.not.inNextMonth|not.inNextMonth
-69.|is.not.inNextWeek|not.inNextWeek
-70.|is.not.inNextYear|not.inNextYear
-71.|is.not.leapYear|not.leapYear
-72.|is.not.month|not.month
-73.|is.not.past|not.past
-74.|is.not.quarterOfYear|not.quarterOfYear
-75.|is.not.today|not.today
-76.|is.not.tomorrow|not.tomorrow
-77.|is.not.weekend|not.weekend
-78.|is.not.weekday|not.weekday
-79.|is.not.year|not.year
-80.|is.not.yesterday|not.yesterday
-81.|is.not.android|not.android
-82.|is.not.androidPhone|not.androidPhone
-83.|is.not.androidTablet|not.androidTablet
-84.|is.not.blackberry|not.blackberry
-85.|is.not.chrome|not.chrome
-86.|is.not.desktop|not.desktop
-87.|is.not.edge|not.edge
-88.|is.not.firefox|not.firefox
-89.|is.not.ie|not.ie
-90.|is.not.ios|not.ios
-91.|is.not.ipad|not.ipad
-92.|is.not.iphone|not.iphone
-93.|is.not.ipod|not.ipod
-94.|is.not.linux|not.linux
-95.|is.not.mac|not.mac
-96.|is.not.mobile|not.mobile
-97.|is.not.offline|not.offline
-98.|is.not.online|not.online
-99.|is.not.opera|not.opera
-100.|is.not.phantom|not.phantom
-101.|is.not.safari|not.safari
-102.|is.not.tablet|not.tablet
-103.|is.not.touchDevice|not.touchDevice
-104.|is.not.windows|not.windows
-105.|is.not.windowsPhone|not.windowsPhone
-106.|is.not.windowsTablet|not.windowsTablet
-107.|is.not.propertyCount|not.propertyCount
-108.|is.not.propertyDefined|not.propertyDefined
-109.|is.not.inArray|not.inArray
-110.|is.not.sorted|not.sorted
-111.|is.all.arguments|all.arguments
-112.|is.all.array|all.array
-113.|is.all.boolean|all.boolean
-114.|is.all.char|all.char
-115.|is.all.date|all.date
-116.|is.all.domNode|all.domNode
-117.|is.all.error|all.error
-118.|is.all.function|all.function
-119.|is.all.json|all.json
-120.|is.all.nan|all.nan
-121.|is.all.null|all.null
-122.|is.all.number|all.number
-123.|is.all.object|all.object
-124.|is.all.regexp|all.regexp
-125.|is.all.string|all.string
-126.|is.all.undefined|all.undefined
-127.|is.all.windowObject|all.windowObject
-128.|is.all.empty|all.empty
-129.|is.all.existy|all.existy
-130.|is.all.falsy|all.falsy
-131.|is.all.truthy|all.truthy
-132.|is.all.decimal|all.decimal
-133.|is.all.even|all.even
-134.|is.all.finite|all.finite
-135.|is.all.infinite|all.infinite
-136.|is.all.integer|all.integer
-137.|is.all.negative|all.negative
-138.|is.all.odd|all.odd
-139.|is.all.positive|all.positive
-140.|is.all.affirmative|all.affirmative
-141.|is.all.alphaNumeric|all.alphaNumeric
-142.|is.all.caPostalCode|all.caPostalCode
-143.|is.all.creditCard|all.creditCard
-144.|is.all.dateString|all.dateString
-145.|is.all.email|all.email
-146.|is.all.eppPhone|all.eppPhone
-147.|is.all.hexadecimal|all.hexadecimal
-148.|is.all.hexColor|all.hexColor
-149.|is.all.ipv4|all.ipv4
-150.|is.all.ipv6|all.ipv6
-151.|is.all.nanpPhone|all.nanpPhone
-152.|is.all.socialSecurityNumber|all.socialSecurityNumber
-153.|is.all.timeString|all.timeString
-154.|is.all.ukPostCode|all.ukPostCode
-155.|is.all.url|all.url
-156.|is.all.usZipCode|all.usZipCode
-157.|is.all.ip|all.ip
-158.|is.all.capitalized|all.capitalized
-159.|is.all.lowerCase|all.lowerCase
-160.|is.all.palindrome|all.palindrome
-161.|is.all.space|all.space
-162.|is.all.upperCase|all.upperCase
-163.|is.all.dayLightSavingTime|all.dayLightSavingTime
-164.|is.all.future|all.future
-165.|is.all.inLastMonth|all.inLastMonth
-166.|is.all.inLastWeek|all.inLastWeek
-167.|is.all.inLastYear|all.inLastYear
-168.|is.all.inNextMonth|all.inNextMonth
-169.|is.all.inNextWeek|all.inNextWeek
-170.|is.all.inNextYear|all.inNextYear
-171.|is.all.leapYear|all.leapYear
-172.|is.all.past|all.past
-173.|is.all.today|all.today
-174.|is.all.tomorrow|all.tomorrow
-175.|is.all.weekend|all.weekend
-176.|is.all.weekday|all.weekday
-177.|is.all.yesterday|all.yesterday
-178.|is.all.sorted|all.sorted
-179.|is.any.arguments|any.arguments
-180.|is.any.array|any.array
-181.|is.any.boolean|any.boolean
-182.|is.any.char|any.char
-183.|is.any.date|any.date
-184.|is.any.domNode|any.domNode
-185.|is.any.error|any.error
-186.|is.any.function|any.function
-187.|is.any.json|any.json
-188.|is.any.nan|any.nan
-189.|is.any.null|any.null
-190.|is.any.number|any.number
-191.|is.any.object|any.object
-192.|is.any.regexp|any.regexp
-193.|is.any.string|any.string
-194.|is.any.undefined|any.undefined
-195.|is.any.windowObject|any.windowObject
-196.|is.any.empty|any.empty
-197.|is.any.existy|any.existy
-198.|is.any.falsy|any.falsy
-199.|is.any.truthy|any.truthy
-200.|is.any.decimal|any.decimal
-201.|is.any.even|any.even
-202.|is.any.finite|any.finite
-203.|is.any.infinite|any.infinite
-204.|is.any.integer|any.integer
-205.|is.any.negative|any.negative
-206.|is.any.odd|any.odd
-207.|is.any.positive|any.positive
-208.|is.any.affirmative|any.affirmative
-209.|is.any.alphaNumeric|any.alphaNumeric
-210.|is.any.caPostalCode|any.caPostalCode
-211.|is.any.creditCard|any.creditCard
-212.|is.any.dateString|any.dateString
-213.|is.any.email|any.email
-214.|is.any.eppPhone|any.eppPhone
-215.|is.any.hexadecimal|any.hexadecimal
-216.|is.any.hexColor|any.hexColor
-217.|is.any.ipv4|any.ipv4
-218.|is.any.ipv6|any.ipv6
-219.|is.any.nanpPhone|any.nanpPhone
-220.|is.any.socialSecurityNumber|any.socialSecurityNumber
-221.|is.any.timeString|any.timeString
-222.|is.any.ukPostCode|any.ukPostCode
-223.|is.any.url|any.url
-224.|is.any.usZipCode|any.usZipCode
-225.|is.any.ip|any.ip
-226.|is.any.capitalized|any.capitalized
-227.|is.any.lowerCase|any.lowerCase
-228.|is.any.palindrome|any.palindrome
-229.|is.any.space|any.space
-230.|is.any.upperCase|any.upperCase
-231.|is.any.dayLightSavingTime|any.dayLightSavingTime
-232.|is.any.future|any.future
-233.|is.any.inLastMonth|any.inLastMonth
-234.|is.any.inLastWeek|any.inLastWeek
-235.|is.any.inLastYear|any.inLastYear
-236.|is.any.inNextMonth|any.inNextMonth
-237.|is.any.inNextWeek|any.inNextWeek
-238.|is.any.inNextYear|any.inNextYear
-239.|is.any.leapYear|any.leapYear
-240.|is.any.past|any.past
-241.|is.any.today|any.today
-242.|is.any.tomorrow|any.tomorrow
-243.|is.any.weekend|any.weekend
-244.|is.any.weekday|any.weekday
-245.|is.any.yesterday|any.yesterday
-246.|is.any.sorted|any.sorted
-247.|is.arguments|arguments
-248.|is.array|array
-249.|is.boolean|boolean
-250.|is.char|char
-251.|is.date|date
-252.|is.domNode|domNode
-253.|is.error|error
-254.|is.function|function
-255.|is.json|json
-256.|is.nan|nan
-257.|is.null|null
-258.|is.number|number
-259.|is.object|object
-260.|is.regexp|regexp
-261.|is.sameType|sameType
-262.|is.string|string
-263.|is.undefined|undefined
-264.|is.windowObject|windowObject
-265.|is.empty|empty
-266.|is.existy|existy
-267.|is.falsy|falsy
-268.|is.truthy|truthy
-269.|is.above|above
-270.|is.decimal|decimal
-271.|is.equal|equal
-272.|is.even|even
-273.|is.finite|finite
-274.|is.infinite|infinite
-275.|is.integer|integer
-276.|is.negative|negative
-277.|is.odd|odd
-278.|is.positive|positive
-279.|is.under|under
-280.|is.within|within
-281.|is.affirmative|affirmative
-282.|is.alphaNumeric|alphaNumeric
-283.|is.caPostalCode|caPostalCode
-284.|is.creditCard|creditCard
-285.|is.dateString|dateString
-286.|is.email|email
-287.|is.eppPhone|eppPhone
-288.|is.hexadecimal|hexadecimal
-289.|is.hexColor|hexColor
-290.|is.ipv4|ipv4
-291.|is.ipv6|ipv6
-292.|is.nanpPhone|nanpPhone
-293.|is.socialSecurityNumber|socialSecurityNumber
-294.|is.timeString|timeString
-295.|is.ukPostCode|ukPostCode
-296.|is.url|url
-297.|is.usZipCode|usZipCode
-298.|is.ip|ip
-299.|is.capitalized|capitalized
-300.|is.endWith|endWith
-301.|is.include|include
-302.|is.lowerCase|lowerCase
-303.|is.palindrome|palindrome
-304.|is.space|space
-305.|is.startWith|startWith
-306.|is.upperCase|upperCase
-307.|is.day|day
-308.|is.dayLightSavingTime|dayLightSavingTime
-309.|is.future|future
-310.|is.inDateRange|inDateRange
-311.|is.inLastMonth|inLastMonth
-312.|is.inLastWeek|inLastWeek
-313.|is.inLastYear|inLastYear
-314.|is.inNextMonth|inNextMonth
-315.|is.inNextWeek|inNextWeek
-316.|is.inNextYear|inNextYear
-317.|is.leapYear|leapYear
-318.|is.month|month
-319.|is.past|past
-320.|is.quarterOfYear|quarterOfYear
-321.|is.today|today
-322.|is.tomorrow|tomorrow
-323.|is.weekend|weekend
-324.|is.weekday|weekday
-325.|is.year|year
-326.|is.yesterday|yesterday
-327.|is.android|android
-328.|is.androidPhone|androidPhone
-329.|is.androidTablet|androidTablet
-330.|is.blackberry|blackberry
-331.|is.chrome|chrome
-332.|is.desktop|desktop
-333.|is.edge|edge
-334.|is.firefox|firefox
-335.|is.ie|ie
-336.|is.ios|ios
-337.|is.ipad|ipad
-338.|is.iphone|iphone
-339.|is.ipod|ipod
-340.|is.linux|linux
-341.|is.mac|mac
-342.|is.mobile|mobile
-343.|is.offline|offline
-344.|is.online|online
-345.|is.opera|opera
-346.|is.phantom|phantom
-347.|is.safari|safari
-348.|is.tablet|tablet
-349.|is.touchDevice|touchDevice
-350.|is.windows|windows
-351.|is.windowsPhone|windowsPhone
-352.|is.windowsTablet|windowsTablet
-353.|is.propertyCount|propertyCount
-354.|is.propertyDefined|propertyDefined
-355.|is.inArray|inArray
-356.|is.sorted|sorted
+### Custom Checkers
+- **"it.contains"** : ```eq.quiz("path", "it.contains", "value")```
+- **"has.size"** : ```eq.quiz("path", "has.size", 4)```
+
+
+### ```is.js Checkers```
+- **is.equal** : ```eq.quiz("path", "is.equal", "value")```
+- **is.not.equal** : ```eq.quiz("path", "is.not.equal", "value")```
+
+> Note: **is.equal** and **is.not.equal** are equality checkers and thus require a third value to compare with.
+
+- **is.not.arguments** : ```eq.quiz("path", "is.not.arguments")```
+- **is.not.array** : ```eq.quiz("path", "is.not.array")```
+- **is.not.boolean** : ```eq.quiz("path", "is.not.boolean")```
+- **is.not.char** : ```eq.quiz("path", "is.not.char")```
+- **is.not.date** : ```eq.quiz("path", "is.not.date")```
+- **is.not.domNode** : ```eq.quiz("path", "is.not.domNode")```
+- **is.not.error** : ```eq.quiz("path", "is.not.error")```
+- **is.not.function** : ```eq.quiz("path", "is.not.function")```
+- **is.not.json** : ```eq.quiz("path", "is.not.json")```
+- **is.not.nan** : ```eq.quiz("path", "is.not.nan")```
+- **is.not.null** : ```eq.quiz("path", "is.not.null")```
+- **is.not.number** : ```eq.quiz("path", "is.not.number")```
+- **is.not.object** : ```eq.quiz("path", "is.not.object")```
+- **is.not.regexp** : ```eq.quiz("path", "is.not.regexp")```
+- **is.not.sameType** : ```eq.quiz("path", "is.not.sameType")```
+- **is.not.string** : ```eq.quiz("path", "is.not.string")```
+- **is.not.undefined** : ```eq.quiz("path", "is.not.undefined")```
+- **is.not.windowObject** : ```eq.quiz("path", "is.not.windowObject")```
+- **is.not.empty** : ```eq.quiz("path", "is.not.empty")```
+- **is.not.existy** : ```eq.quiz("path", "is.not.existy")```
+- **is.not.falsy** : ```eq.quiz("path", "is.not.falsy")```
+- **is.not.truthy** : ```eq.quiz("path", "is.not.truthy")```
+- **is.not.above** : ```eq.quiz("path", "is.not.above")```
+- **is.not.decimal** : ```eq.quiz("path", "is.not.decimal")```
+- **is.not.even** : ```eq.quiz("path", "is.not.even")```
+- **is.not.finite** : ```eq.quiz("path", "is.not.finite")```
+- **is.not.infinite** : ```eq.quiz("path", "is.not.infinite")```
+- **is.not.integer** : ```eq.quiz("path", "is.not.integer")```
+- **is.not.negative** : ```eq.quiz("path", "is.not.negative")```
+- **is.not.odd** : ```eq.quiz("path", "is.not.odd")```
+- **is.not.positive** : ```eq.quiz("path", "is.not.positive")```
+- **is.not.under** : ```eq.quiz("path", "is.not.under")```
+- **is.not.within** : ```eq.quiz("path", "is.not.within")```
+- **is.not.affirmative** : ```eq.quiz("path", "is.not.affirmative")```
+- **is.not.alphaNumeric** : ```eq.quiz("path", "is.not.alphaNumeric")```
+- **is.not.caPostalCode** : ```eq.quiz("path", "is.not.caPostalCode")```
+- **is.not.creditCard** : ```eq.quiz("path", "is.not.creditCard")```
+- **is.not.dateString** : ```eq.quiz("path", "is.not.dateString")```
+- **is.not.email** : ```eq.quiz("path", "is.not.email")```
+- **is.not.eppPhone** : ```eq.quiz("path", "is.not.eppPhone")```
+- **is.not.hexadecimal** : ```eq.quiz("path", "is.not.hexadecimal")```
+- **is.not.hexColor** : ```eq.quiz("path", "is.not.hexColor")```
+- **is.not.ipv4** : ```eq.quiz("path", "is.not.ipv4")```
+- **is.not.ipv6** : ```eq.quiz("path", "is.not.ipv6")```
+- **is.not.nanpPhone** : ```eq.quiz("path", "is.not.nanpPhone")```
+- **is.not.socialSecurityNumber** : ```eq.quiz("path", "is.not.socialSecurityNumber")```
+- **is.not.timeString** : ```eq.quiz("path", "is.not.timeString")```
+- **is.not.ukPostCode** : ```eq.quiz("path", "is.not.ukPostCode")```
+- **is.not.url** : ```eq.quiz("path", "is.not.url")```
+- **is.not.usZipCode** : ```eq.quiz("path", "is.not.usZipCode")```
+- **is.not.ip** : ```eq.quiz("path", "is.not.ip")```
+- **is.not.capitalized** : ```eq.quiz("path", "is.not.capitalized")```
+- **is.not.endWith** : ```eq.quiz("path", "is.not.endWith")```
+- **is.not.include** : ```eq.quiz("path", "is.not.include")```
+- **is.not.lowerCase** : ```eq.quiz("path", "is.not.lowerCase")```
+- **is.not.palindrome** : ```eq.quiz("path", "is.not.palindrome")```
+- **is.not.space** : ```eq.quiz("path", "is.not.space")```
+- **is.not.startWith** : ```eq.quiz("path", "is.not.startWith")```
+- **is.not.upperCase** : ```eq.quiz("path", "is.not.upperCase")```
+- **is.not.day** : ```eq.quiz("path", "is.not.day")```
+- **is.not.dayLightSavingTime** : ```eq.quiz("path", "is.not.dayLightSavingTime")```
+- **is.not.future** : ```eq.quiz("path", "is.not.future")```
+- **is.not.inDateRange** : ```eq.quiz("path", "is.not.inDateRange")```
+- **is.not.inLastMonth** : ```eq.quiz("path", "is.not.inLastMonth")```
+- **is.not.inLastWeek** : ```eq.quiz("path", "is.not.inLastWeek")```
+- **is.not.inLastYear** : ```eq.quiz("path", "is.not.inLastYear")```
+- **is.not.inNextMonth** : ```eq.quiz("path", "is.not.inNextMonth")```
+- **is.not.inNextWeek** : ```eq.quiz("path", "is.not.inNextWeek")```
+- **is.not.inNextYear** : ```eq.quiz("path", "is.not.inNextYear")```
+- **is.not.leapYear** : ```eq.quiz("path", "is.not.leapYear")```
+- **is.not.month** : ```eq.quiz("path", "is.not.month")```
+- **is.not.past** : ```eq.quiz("path", "is.not.past")```
+- **is.not.quarterOfYear** : ```eq.quiz("path", "is.not.quarterOfYear")```
+- **is.not.today** : ```eq.quiz("path", "is.not.today")```
+- **is.not.tomorrow** : ```eq.quiz("path", "is.not.tomorrow")```
+- **is.not.weekend** : ```eq.quiz("path", "is.not.weekend")```
+- **is.not.weekday** : ```eq.quiz("path", "is.not.weekday")```
+- **is.not.year** : ```eq.quiz("path", "is.not.year")```
+- **is.not.yesterday** : ```eq.quiz("path", "is.not.yesterday")```
+- **is.not.android** : ```eq.quiz("path", "is.not.android")```
+- **is.not.androidPhone** : ```eq.quiz("path", "is.not.androidPhone")```
+- **is.not.androidTablet** : ```eq.quiz("path", "is.not.androidTablet")```
+- **is.not.blackberry** : ```eq.quiz("path", "is.not.blackberry")```
+- **is.not.chrome** : ```eq.quiz("path", "is.not.chrome")```
+- **is.not.desktop** : ```eq.quiz("path", "is.not.desktop")```
+- **is.not.edge** : ```eq.quiz("path", "is.not.edge")```
+- **is.not.firefox** : ```eq.quiz("path", "is.not.firefox")```
+- **is.not.ie** : ```eq.quiz("path", "is.not.ie")```
+- **is.not.ios** : ```eq.quiz("path", "is.not.ios")```
+- **is.not.ipad** : ```eq.quiz("path", "is.not.ipad")```
+- **is.not.iphone** : ```eq.quiz("path", "is.not.iphone")```
+- **is.not.ipod** : ```eq.quiz("path", "is.not.ipod")```
+- **is.not.linux** : ```eq.quiz("path", "is.not.linux")```
+- **is.not.mac** : ```eq.quiz("path", "is.not.mac")```
+- **is.not.mobile** : ```eq.quiz("path", "is.not.mobile")```
+- **is.not.offline** : ```eq.quiz("path", "is.not.offline")```
+- **is.not.online** : ```eq.quiz("path", "is.not.online")```
+- **is.not.opera** : ```eq.quiz("path", "is.not.opera")```
+- **is.not.phantom** : ```eq.quiz("path", "is.not.phantom")```
+- **is.not.safari** : ```eq.quiz("path", "is.not.safari")```
+- **is.not.tablet** : ```eq.quiz("path", "is.not.tablet")```
+- **is.not.touchDevice** : ```eq.quiz("path", "is.not.touchDevice")```
+- **is.not.windows** : ```eq.quiz("path", "is.not.windows")```
+- **is.not.windowsPhone** : ```eq.quiz("path", "is.not.windowsPhone")```
+- **is.not.windowsTablet** : ```eq.quiz("path", "is.not.windowsTablet")```
+- **is.not.propertyCount** : ```eq.quiz("path", "is.not.propertyCount")```
+- **is.not.propertyDefined** : ```eq.quiz("path", "is.not.propertyDefined")```
+- **is.not.inArray** : ```eq.quiz("path", "is.not.inArray")```
+- **is.not.sorted** : ```eq.quiz("path", "is.not.sorted")```
+- **is.all.arguments** : ```eq.quiz("path", "is.all.arguments")```
+- **is.all.array** : ```eq.quiz("path", "is.all.array")```
+- **is.all.boolean** : ```eq.quiz("path", "is.all.boolean")```
+- **is.all.char** : ```eq.quiz("path", "is.all.char")```
+- **is.all.date** : ```eq.quiz("path", "is.all.date")```
+- **is.all.domNode** : ```eq.quiz("path", "is.all.domNode")```
+- **is.all.error** : ```eq.quiz("path", "is.all.error")```
+- **is.all.function** : ```eq.quiz("path", "is.all.function")```
+- **is.all.json** : ```eq.quiz("path", "is.all.json")```
+- **is.all.nan** : ```eq.quiz("path", "is.all.nan")```
+- **is.all.null** : ```eq.quiz("path", "is.all.null")```
+- **is.all.number** : ```eq.quiz("path", "is.all.number")```
+- **is.all.object** : ```eq.quiz("path", "is.all.object")```
+- **is.all.regexp** : ```eq.quiz("path", "is.all.regexp")```
+- **is.all.string** : ```eq.quiz("path", "is.all.string")```
+- **is.all.undefined** : ```eq.quiz("path", "is.all.undefined")```
+- **is.all.windowObject** : ```eq.quiz("path", "is.all.windowObject")```
+- **is.all.empty** : ```eq.quiz("path", "is.all.empty")```
+- **is.all.existy** : ```eq.quiz("path", "is.all.existy")```
+- **is.all.falsy** : ```eq.quiz("path", "is.all.falsy")```
+- **is.all.truthy** : ```eq.quiz("path", "is.all.truthy")```
+- **is.all.decimal** : ```eq.quiz("path", "is.all.decimal")```
+- **is.all.even** : ```eq.quiz("path", "is.all.even")```
+- **is.all.finite** : ```eq.quiz("path", "is.all.finite")```
+- **is.all.infinite** : ```eq.quiz("path", "is.all.infinite")```
+- **is.all.integer** : ```eq.quiz("path", "is.all.integer")```
+- **is.all.negative** : ```eq.quiz("path", "is.all.negative")```
+- **is.all.odd** : ```eq.quiz("path", "is.all.odd")```
+- **is.all.positive** : ```eq.quiz("path", "is.all.positive")```
+- **is.all.affirmative** : ```eq.quiz("path", "is.all.affirmative")```
+- **is.all.alphaNumeric** : ```eq.quiz("path", "is.all.alphaNumeric")```
+- **is.all.caPostalCode** : ```eq.quiz("path", "is.all.caPostalCode")```
+- **is.all.creditCard** : ```eq.quiz("path", "is.all.creditCard")```
+- **is.all.dateString** : ```eq.quiz("path", "is.all.dateString")```
+- **is.all.email** : ```eq.quiz("path", "is.all.email")```
+- **is.all.eppPhone** : ```eq.quiz("path", "is.all.eppPhone")```
+- **is.all.hexadecimal** : ```eq.quiz("path", "is.all.hexadecimal")```
+- **is.all.hexColor** : ```eq.quiz("path", "is.all.hexColor")```
+- **is.all.ipv4** : ```eq.quiz("path", "is.all.ipv4")```
+- **is.all.ipv6** : ```eq.quiz("path", "is.all.ipv6")```
+- **is.all.nanpPhone** : ```eq.quiz("path", "is.all.nanpPhone")```
+- **is.all.socialSecurityNumber** : ```eq.quiz("path", "is.all.socialSecurityNumber")```
+- **is.all.timeString** : ```eq.quiz("path", "is.all.timeString")```
+- **is.all.ukPostCode** : ```eq.quiz("path", "is.all.ukPostCode")```
+- **is.all.url** : ```eq.quiz("path", "is.all.url")```
+- **is.all.usZipCode** : ```eq.quiz("path", "is.all.usZipCode")```
+- **is.all.ip** : ```eq.quiz("path", "is.all.ip")```
+- **is.all.capitalized** : ```eq.quiz("path", "is.all.capitalized")```
+- **is.all.lowerCase** : ```eq.quiz("path", "is.all.lowerCase")```
+- **is.all.palindrome** : ```eq.quiz("path", "is.all.palindrome")```
+- **is.all.space** : ```eq.quiz("path", "is.all.space")```
+- **is.all.upperCase** : ```eq.quiz("path", "is.all.upperCase")```
+- **is.all.dayLightSavingTime** : ```eq.quiz("path", "is.all.dayLightSavingTime")```
+- **is.all.future** : ```eq.quiz("path", "is.all.future")```
+- **is.all.inLastMonth** : ```eq.quiz("path", "is.all.inLastMonth")```
+- **is.all.inLastWeek** : ```eq.quiz("path", "is.all.inLastWeek")```
+- **is.all.inLastYear** : ```eq.quiz("path", "is.all.inLastYear")```
+- **is.all.inNextMonth** : ```eq.quiz("path", "is.all.inNextMonth")```
+- **is.all.inNextWeek** : ```eq.quiz("path", "is.all.inNextWeek")```
+- **is.all.inNextYear** : ```eq.quiz("path", "is.all.inNextYear")```
+- **is.all.leapYear** : ```eq.quiz("path", "is.all.leapYear")```
+- **is.all.past** : ```eq.quiz("path", "is.all.past")```
+- **is.all.today** : ```eq.quiz("path", "is.all.today")```
+- **is.all.tomorrow** : ```eq.quiz("path", "is.all.tomorrow")```
+- **is.all.weekend** : ```eq.quiz("path", "is.all.weekend")```
+- **is.all.weekday** : ```eq.quiz("path", "is.all.weekday")```
+- **is.all.yesterday** : ```eq.quiz("path", "is.all.yesterday")```
+- **is.all.sorted** : ```eq.quiz("path", "is.all.sorted")```
+- **is.any.arguments** : ```eq.quiz("path", "is.any.arguments")```
+- **is.any.array** : ```eq.quiz("path", "is.any.array")```
+- **is.any.boolean** : ```eq.quiz("path", "is.any.boolean")```
+- **is.any.char** : ```eq.quiz("path", "is.any.char")```
+- **is.any.date** : ```eq.quiz("path", "is.any.date")```
+- **is.any.domNode** : ```eq.quiz("path", "is.any.domNode")```
+- **is.any.error** : ```eq.quiz("path", "is.any.error")```
+- **is.any.function** : ```eq.quiz("path", "is.any.function")```
+- **is.any.json** : ```eq.quiz("path", "is.any.json")```
+- **is.any.nan** : ```eq.quiz("path", "is.any.nan")```
+- **is.any.null** : ```eq.quiz("path", "is.any.null")```
+- **is.any.number** : ```eq.quiz("path", "is.any.number")```
+- **is.any.object** : ```eq.quiz("path", "is.any.object")```
+- **is.any.regexp** : ```eq.quiz("path", "is.any.regexp")```
+- **is.any.string** : ```eq.quiz("path", "is.any.string")```
+- **is.any.undefined** : ```eq.quiz("path", "is.any.undefined")```
+- **is.any.windowObject** : ```eq.quiz("path", "is.any.windowObject")```
+- **is.any.empty** : ```eq.quiz("path", "is.any.empty")```
+- **is.any.existy** : ```eq.quiz("path", "is.any.existy")```
+- **is.any.falsy** : ```eq.quiz("path", "is.any.falsy")```
+- **is.any.truthy** : ```eq.quiz("path", "is.any.truthy")```
+- **is.any.decimal** : ```eq.quiz("path", "is.any.decimal")```
+- **is.any.even** : ```eq.quiz("path", "is.any.even")```
+- **is.any.finite** : ```eq.quiz("path", "is.any.finite")```
+- **is.any.infinite** : ```eq.quiz("path", "is.any.infinite")```
+- **is.any.integer** : ```eq.quiz("path", "is.any.integer")```
+- **is.any.negative** : ```eq.quiz("path", "is.any.negative")```
+- **is.any.odd** : ```eq.quiz("path", "is.any.odd")```
+- **is.any.positive** : ```eq.quiz("path", "is.any.positive")```
+- **is.any.affirmative** : ```eq.quiz("path", "is.any.affirmative")```
+- **is.any.alphaNumeric** : ```eq.quiz("path", "is.any.alphaNumeric")```
+- **is.any.caPostalCode** : ```eq.quiz("path", "is.any.caPostalCode")```
+- **is.any.creditCard** : ```eq.quiz("path", "is.any.creditCard")```
+- **is.any.dateString** : ```eq.quiz("path", "is.any.dateString")```
+- **is.any.email** : ```eq.quiz("path", "is.any.email")```
+- **is.any.eppPhone** : ```eq.quiz("path", "is.any.eppPhone")```
+- **is.any.hexadecimal** : ```eq.quiz("path", "is.any.hexadecimal")```
+- **is.any.hexColor** : ```eq.quiz("path", "is.any.hexColor")```
+- **is.any.ipv4** : ```eq.quiz("path", "is.any.ipv4")```
+- **is.any.ipv6** : ```eq.quiz("path", "is.any.ipv6")```
+- **is.any.nanpPhone** : ```eq.quiz("path", "is.any.nanpPhone")```
+- **is.any.socialSecurityNumber** : ```eq.quiz("path", "is.any.socialSecurityNumber")```
+- **is.any.timeString** : ```eq.quiz("path", "is.any.timeString")```
+- **is.any.ukPostCode** : ```eq.quiz("path", "is.any.ukPostCode")```
+- **is.any.url** : ```eq.quiz("path", "is.any.url")```
+- **is.any.usZipCode** : ```eq.quiz("path", "is.any.usZipCode")```
+- **is.any.ip** : ```eq.quiz("path", "is.any.ip")```
+- **is.any.capitalized** : ```eq.quiz("path", "is.any.capitalized")```
+- **is.any.lowerCase** : ```eq.quiz("path", "is.any.lowerCase")```
+- **is.any.palindrome** : ```eq.quiz("path", "is.any.palindrome")```
+- **is.any.space** : ```eq.quiz("path", "is.any.space")```
+- **is.any.upperCase** : ```eq.quiz("path", "is.any.upperCase")```
+- **is.any.dayLightSavingTime** : ```eq.quiz("path", "is.any.dayLightSavingTime")```
+- **is.any.future** : ```eq.quiz("path", "is.any.future")```
+- **is.any.inLastMonth** : ```eq.quiz("path", "is.any.inLastMonth")```
+- **is.any.inLastWeek** : ```eq.quiz("path", "is.any.inLastWeek")```
+- **is.any.inLastYear** : ```eq.quiz("path", "is.any.inLastYear")```
+- **is.any.inNextMonth** : ```eq.quiz("path", "is.any.inNextMonth")```
+- **is.any.inNextWeek** : ```eq.quiz("path", "is.any.inNextWeek")```
+- **is.any.inNextYear** : ```eq.quiz("path", "is.any.inNextYear")```
+- **is.any.leapYear** : ```eq.quiz("path", "is.any.leapYear")```
+- **is.any.past** : ```eq.quiz("path", "is.any.past")```
+- **is.any.today** : ```eq.quiz("path", "is.any.today")```
+- **is.any.tomorrow** : ```eq.quiz("path", "is.any.tomorrow")```
+- **is.any.weekend** : ```eq.quiz("path", "is.any.weekend")```
+- **is.any.weekday** : ```eq.quiz("path", "is.any.weekday")```
+- **is.any.yesterday** : ```eq.quiz("path", "is.any.yesterday")```
+- **is.any.sorted** : ```eq.quiz("path", "is.any.sorted")```
+- **is.arguments** : ```eq.quiz("path", "is.arguments")```
+- **is.array** : ```eq.quiz("path", "is.array")```
+- **is.boolean** : ```eq.quiz("path", "is.boolean")```
+- **is.char** : ```eq.quiz("path", "is.char")```
+- **is.date** : ```eq.quiz("path", "is.date")```
+- **is.domNode** : ```eq.quiz("path", "is.domNode")```
+- **is.error** : ```eq.quiz("path", "is.error")```
+- **is.function** : ```eq.quiz("path", "is.function")```
+- **is.json** : ```eq.quiz("path", "is.json")```
+- **is.nan** : ```eq.quiz("path", "is.nan")```
+- **is.null** : ```eq.quiz("path", "is.null")```
+- **is.number** : ```eq.quiz("path", "is.number")```
+- **is.object** : ```eq.quiz("path", "is.object")```
+- **is.regexp** : ```eq.quiz("path", "is.regexp")```
+- **is.sameType** : ```eq.quiz("path", "is.sameType")```
+- **is.string** : ```eq.quiz("path", "is.string")```
+- **is.undefined** : ```eq.quiz("path", "is.undefined")```
+- **is.windowObject** : ```eq.quiz("path", "is.windowObject")```
+- **is.empty** : ```eq.quiz("path", "is.empty")```
+- **is.existy** : ```eq.quiz("path", "is.existy")```
+- **is.falsy** : ```eq.quiz("path", "is.falsy")```
+- **is.truthy** : ```eq.quiz("path", "is.truthy")```
+- **is.above** : ```eq.quiz("path", "is.above")```
+- **is.decimal** : ```eq.quiz("path", "is.decimal")```
+- **is.even** : ```eq.quiz("path", "is.even")```
+- **is.finite** : ```eq.quiz("path", "is.finite")```
+- **is.infinite** : ```eq.quiz("path", "is.infinite")```
+- **is.integer** : ```eq.quiz("path", "is.integer")```
+- **is.negative** : ```eq.quiz("path", "is.negative")```
+- **is.odd** : ```eq.quiz("path", "is.odd")```
+- **is.positive** : ```eq.quiz("path", "is.positive")```
+- **is.under** : ```eq.quiz("path", "is.under")```
+- **is.within** : ```eq.quiz("path", "is.within")```
+- **is.affirmative** : ```eq.quiz("path", "is.affirmative")```
+- **is.alphaNumeric** : ```eq.quiz("path", "is.alphaNumeric")```
+- **is.caPostalCode** : ```eq.quiz("path", "is.caPostalCode")```
+- **is.creditCard** : ```eq.quiz("path", "is.creditCard")```
+- **is.dateString** : ```eq.quiz("path", "is.dateString")```
+- **is.email** : ```eq.quiz("path", "is.email")```
+- **is.eppPhone** : ```eq.quiz("path", "is.eppPhone")```
+- **is.hexadecimal** : ```eq.quiz("path", "is.hexadecimal")```
+- **is.hexColor** : ```eq.quiz("path", "is.hexColor")```
+- **is.ipv4** : ```eq.quiz("path", "is.ipv4")```
+- **is.ipv6** : ```eq.quiz("path", "is.ipv6")```
+- **is.nanpPhone** : ```eq.quiz("path", "is.nanpPhone")```
+- **is.socialSecurityNumber** : ```eq.quiz("path", "is.socialSecurityNumber")```
+- **is.timeString** : ```eq.quiz("path", "is.timeString")```
+- **is.ukPostCode** : ```eq.quiz("path", "is.ukPostCode")```
+- **is.url** : ```eq.quiz("path", "is.url")```
+- **is.usZipCode** : ```eq.quiz("path", "is.usZipCode")```
+- **is.ip** : ```eq.quiz("path", "is.ip")```
+- **is.capitalized** : ```eq.quiz("path", "is.capitalized")```
+- **is.endWith** : ```eq.quiz("path", "is.endWith")```
+- **is.include** : ```eq.quiz("path", "is.include")```
+- **is.lowerCase** : ```eq.quiz("path", "is.lowerCase")```
+- **is.palindrome** : ```eq.quiz("path", "is.palindrome")```
+- **is.space** : ```eq.quiz("path", "is.space")```
+- **is.startWith** : ```eq.quiz("path", "is.startWith")```
+- **is.upperCase** : ```eq.quiz("path", "is.upperCase")```
+- **is.day** : ```eq.quiz("path", "is.day")```
+- **is.dayLightSavingTime** : ```eq.quiz("path", "is.dayLightSavingTime")```
+- **is.future** : ```eq.quiz("path", "is.future")```
+- **is.inDateRange** : ```eq.quiz("path", "is.inDateRange")```
+- **is.inLastMonth** : ```eq.quiz("path", "is.inLastMonth")```
+- **is.inLastWeek** : ```eq.quiz("path", "is.inLastWeek")```
+- **is.inLastYear** : ```eq.quiz("path", "is.inLastYear")```
+- **is.inNextMonth** : ```eq.quiz("path", "is.inNextMonth")```
+- **is.inNextWeek** : ```eq.quiz("path", "is.inNextWeek")```
+- **is.inNextYear** : ```eq.quiz("path", "is.inNextYear")```
+- **is.leapYear** : ```eq.quiz("path", "is.leapYear")```
+- **is.month** : ```eq.quiz("path", "is.month")```
+- **is.past** : ```eq.quiz("path", "is.past")```
+- **is.quarterOfYear** : ```eq.quiz("path", "is.quarterOfYear")```
+- **is.today** : ```eq.quiz("path", "is.today")```
+- **is.tomorrow** : ```eq.quiz("path", "is.tomorrow")```
+- **is.weekend** : ```eq.quiz("path", "is.weekend")```
+- **is.weekday** : ```eq.quiz("path", "is.weekday")```
+- **is.year** : ```eq.quiz("path", "is.year")```
+- **is.yesterday** : ```eq.quiz("path", "is.yesterday")```
+- **is.android** : ```eq.quiz("path", "is.android")```
+- **is.androidPhone** : ```eq.quiz("path", "is.androidPhone")```
+- **is.androidTablet** : ```eq.quiz("path", "is.androidTablet")```
+- **is.blackberry** : ```eq.quiz("path", "is.blackberry")```
+- **is.chrome** : ```eq.quiz("path", "is.chrome")```
+- **is.desktop** : ```eq.quiz("path", "is.desktop")```
+- **is.edge** : ```eq.quiz("path", "is.edge")```
+- **is.firefox** : ```eq.quiz("path", "is.firefox")```
+- **is.ie** : ```eq.quiz("path", "is.ie")```
+- **is.ios** : ```eq.quiz("path", "is.ios")```
+- **is.ipad** : ```eq.quiz("path", "is.ipad")```
+- **is.iphone** : ```eq.quiz("path", "is.iphone")```
+- **is.ipod** : ```eq.quiz("path", "is.ipod")```
+- **is.linux** : ```eq.quiz("path", "is.linux")```
+- **is.mac** : ```eq.quiz("path", "is.mac")```
+- **is.mobile** : ```eq.quiz("path", "is.mobile")```
+- **is.offline** : ```eq.quiz("path", "is.offline")```
+- **is.online** : ```eq.quiz("path", "is.online")```
+- **is.opera** : ```eq.quiz("path", "is.opera")```
+- **is.phantom** : ```eq.quiz("path", "is.phantom")```
+- **is.safari** : ```eq.quiz("path", "is.safari")```
+- **is.tablet** : ```eq.quiz("path", "is.tablet")```
+- **is.touchDevice** : ```eq.quiz("path", "is.touchDevice")```
+- **is.windows** : ```eq.quiz("path", "is.windows")```
+- **is.windowsPhone** : ```eq.quiz("path", "is.windowsPhone")```
+- **is.windowsTablet** : ```eq.quiz("path", "is.windowsTablet")```
+- **is.propertyCount** : ```eq.quiz("path", "is.propertyCount")```
+- **is.propertyDefined** : ```eq.quiz("path", "is.propertyDefined")```
+- **is.inArray** : ```eq.quiz("path", "is.inArray")```
+- **is.sorted** : ```eq.quiz("path", "is.sorted")```
