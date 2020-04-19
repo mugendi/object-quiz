@@ -96,10 +96,6 @@ This is the main function that performs all the magic.
 - **check:** Optional *is.js* function to check the value against. Please check out [the documentation](http://is.js.org/#number).
 - **expected:** Optional. Used for equality matches. This is the value that is checked against. 
 
-## ```"is." shorthand```
-Notice that instead of typing all your checkers as **"is.string"** or **"is.not.string"** you can omit the first bit  and simply use **"string"** or **"not.string"**.
-
-
 # Available checkers 
 You can use any of theseto check your object values.
 

@@ -18,12 +18,17 @@ function oq(obj, options = {}) {
 
   let dot = new Dot(".");
 
-  let availableFuncs = dot.dot(isJs);
+  let availableFuncs = dot.dot({ is: isJs });
   delete availableFuncs.VERSION;
   delete availableFuncs.setNamespace;
   delete availableFuncs.setRegexp;
 
-  //   console.log(availableFuncs);
+  availableFuncs = Object.assign(
+    availableFuncs,
+    dot.dot(require("./lib/custom-functions"))
+  );
+
+  // console.log(availableFuncs);
 
   dot = new Dot(this.options.separator);
   this.obj = obj;
@@ -35,39 +40,41 @@ function oq(obj, options = {}) {
 
 oq.prototype.quiz = function quiz(path, check, expected) {
   let self = this,
-    pathRegexp = self.path_to_regexp(path),
+    pathRegEXP = self.path_to_regexp(path),
     matches = [],
     testedMatches = [];
 
+  // console.log({path, pathRegEXP});
 
   // Find all matching keys
   for (let key in this.dotObj) {
-    if ((m = key.match(pathRegexp)) && matches.indexOf(m[1]) == -1) {
+    if ((m = key.match(pathRegEXP)) && matches.indexOf(m[1]) == -1) {
       matches.push(m[1]);
     }
   }
 
+  // console.log(matches);
   // Map back to actual values
   matches = matches.map((p) => this.dot.pick(p, this.obj));
 
+  // console.log(matches);
+
   //perform required checks if we have some matches
   if (check && matches && matches.length) {
-    let check_name = check.replace(/^is\./, "");
-
     // Ensure we are using a valid check...
-    if (self.funcs[check_name]) {
+    // console.log({check}, self.funcs[check]);
+    if (self.funcs[check]) {
       testedMatches = matches.filter((v) => {
-        v = Array.isArray(v) ? v : [v];
-        //add expected to array so we can spread all arguments necessary
-        if (expected) {
-          v = v.slice(0, 1).concat([expected]);
+        //pass arguments as expected
+        if (["is.equal", "has.size", "it.contains"].indexOf(check) > -1) {
+          return self.funcs[check](v, expected);
+        } else if (/\.(any|all|sameType)/.test(check)) {
+          return self.funcs[check](...v);
+        } else {          
+          return self.funcs[check](v);
         }
-
-        return self.funcs[check_name](...v);
       });
 
-      //No need to return duplicates
-      testedMatches = testedMatches.filter(onlyUnique);
     }
   } else if (matches && matches.length) {
     testedMatches = matches;
@@ -88,17 +95,14 @@ oq.prototype.path_to_regexp = function path_to_regexp(path) {
     //replace back terminating $
     .replace(/\\\$$/, "");
 
-//   console.log();
-  let pathRegexp = new RegExp(
-    `(${path})(.+)?`,
+  //   console.log();
+  let pathRegEXP = new RegExp(
+    `^(${path})(.+)?`,
     this.options.caseSensitive ? "" : "i"
   );
 
-  return pathRegexp;
+  return pathRegEXP;
 };
 
-function onlyUnique(value, index, self) {
-  return self.indexOf(value) === index;
-}
 
 module.exports = oq;
