@@ -8,7 +8,8 @@
   },
   "description": "When you need to query those deep JSON objects in over 300+ ways! just Quiz them!",
   "directories": {
-    "lib": "lib"
+    "lib": "lib",
+    "test": "test"
   },
   "devDependencies": {
     "jest": "^25.3.0"
@@ -25,5 +26,13 @@
     "inspect",
     "deep"
   ],
-  "author": "Anthony Mugendi <ngurumugz@gmail.com>"
+  "author": "Anthony Mugendi <ngurumugz@gmail.com>",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mugendi/object-quiz.git"
+  },
+  "bugs": {
+    "url": "https://github.com/mugendi/object-quiz/issues"
+  },
+  "homepage": "https://github.com/mugendi/object-quiz#readme"
 }
