@@ -61,7 +61,7 @@ This makes 300+ different checks immediately available to you!
 
 5. Finally, I wanted a library capable of handling complex JSON paths and use "glob like" patterns to traverse and find keys whose path is not known ro too long to type out.
 
-# Too much Talk?
+# Too much talk?
 Here are more examples using the object above...
 
 ```javascript
@@ -132,6 +132,11 @@ For example ```oq.quiz("*nested_object?data::number", "is.number")``` traverses 
     }
 ]
 ```
+
+## Traversing array keys
+To traverse array keys such as "[0]", "[1]" and so on. simply use the character class **"[\[:number:\]]"**.
+
+
 # Available checkers 
 You can use any of these to check your object values.
 

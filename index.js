@@ -37,20 +37,27 @@ function oq(obj, options = {}) {
   this.dotObj = this.dot.dot(this.obj);
 }
 
-oq.prototype.match_obj = function match_obj(obj, pathRegEXP, dotObj) {
-  let matches =[];
+oq.prototype.match_obj = function match_obj(obj, pathRegEXP, dotObj, path) {
+  let matches = [];
+
+  if (path == "[0-9]") {
+    console.log({ path, pathRegEXP });
+  }
+
   // Find all matching keys
   for (let key in dotObj) {
     if ((m = key.match(pathRegEXP)) && matches.indexOf(m[1]) == -1) {
+      // if (path == '[0]') {
+      //   console.log(m);
+      // }
       matches.push(m[1]);
     }
   }
 
-  // console.log(matches);
   // Map back to actual values
   matches = matches.map((p) => this.dot.pick(p, obj));
 
-  return matches
+  return matches;
 };
 
 oq.prototype.quiz = function quiz(path, check, expected) {
@@ -66,11 +73,9 @@ oq.prototype.quiz = function quiz(path, check, expected) {
     { pathRegEXP, useKey } = self.path_to_regexp(path),
     testedMatches = [];
 
-    let matches = this.match_obj(this.obj, pathRegEXP, this.dotObj) 
+  let matches = this.match_obj(this.obj, pathRegEXP, this.dotObj, path);
 
-  // console.log({path, pathRegEXP, useKey});
-
-  // console.log(matches);
+  // console.log({ path, pathRegEXP, useKey });
 
   //perform required checks if we have some matches
   if (check && matches && matches.length) {
@@ -79,8 +84,8 @@ oq.prototype.quiz = function quiz(path, check, expected) {
     if (self.funcs[check]) {
       testedMatches = matches.filter((o) => {
         // Use Key if set
-        let v =  o;
-        if(useKey){
+        let v = o;
+        if (useKey && o) {
           v = this.match_obj(o, useKey, this.dot.dot(o)).shift();
         }
         //pass arguments as expected
@@ -105,7 +110,7 @@ oq.prototype.path_to_regexp = function path_to_regexp(path) {
 
   let resp = {
     pathRegEXP: this.format_path(arr[0]),
-    useKey: this.format_path(arr[1])|| null,
+    useKey: this.format_path(arr[1]) || null,
   };
 
   // console.log(resp);
@@ -115,14 +120,16 @@ oq.prototype.path_to_regexp = function path_to_regexp(path) {
 
 oq.prototype.format_path = function path_to_regexp(path) {
   //Ensure path is well formattedF
-  if(typeof path !=='string') return null;
+  if (typeof path !== "string") return null;
 
   path = path.replace(/::\*/g, "*").replace(/\*{2,}/, "*");
 
   // Escape string just to be safe
   path = escapeRegexp(path);
 
+
   path = path
+    .replace(/\\\[\\\[:number:\\\]\\\]/g, "\\[[0-9]+\\]")
     .replace(/\\?\*/g, "[\\w\\W]*")
     //replace back terminating $
     .replace(/\\\$$/, "");
