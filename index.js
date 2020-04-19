@@ -1,5 +1,4 @@
 const isJs = require("is_js"),
-  escapeRegexp = require("escape-string-regexp"),
   Dot = require("./lib/dot-object");
 
 function oq(obj, options = {}) {
@@ -103,6 +102,16 @@ oq.prototype.path_to_regexp = function path_to_regexp(path) {
 
   return pathRegEXP;
 };
+
+function escapeRegexp(string) {
+	if (typeof string !== 'string') {
+		throw new TypeError('Expected a string');
+	}
+
+	return string
+		.replace(/[|\\{}()[\]^$+*?.]/g, '\\$&')
+		.replace(/-/g, '\\u002d');
+}
 
 
 module.exports = oq;
