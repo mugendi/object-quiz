@@ -141,7 +141,10 @@ To traverse array keys such as "[0]", "[1]" and so on. simply use the character 
 You can use any of these to check your object values.
 
 ### Custom Checkers
-- **it.contains** : ```eq.quiz("path", "it.contains", "value")```
+- **it.does.contain** : ```eq.quiz("path", "it.does.contain", "value")```
+- **it.does.not.contain** : ```eq.quiz("path", "it.does.not.contain", "value")```
+- **it.is.contained** : ```eq.quiz("path", "it.is.contained", "value")```
+- **it.is.not.contained** : ```eq.quiz("path", "it.is.not.contained", "value")```
 - **has.size** : ```eq.quiz("path", "has.size", 4)```
 
 

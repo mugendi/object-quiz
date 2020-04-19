@@ -89,7 +89,7 @@ oq.prototype.quiz = function quiz(path, check, expected) {
           v = this.match_obj(o, useKey, this.dot.dot(o)).shift();
         }
         //pass arguments as expected
-        if (["is.equal", "has.size", "it.contains"].indexOf(check) > -1) {
+        if (["is.equal"].indexOf(check) > -1 || /(it|has)\./.test(check)) {
           return self.funcs[check](v, expected);
         } else if (/\.(any|all|sameType)/.test(check)) {
           return self.funcs[check](...v);
@@ -126,7 +126,6 @@ oq.prototype.format_path = function path_to_regexp(path) {
 
   // Escape string just to be safe
   path = escapeRegexp(path);
-
 
   path = path
     .replace(/\\\[\\\[:number:\\\]\\\]/g, "\\[[0-9]+\\]")
