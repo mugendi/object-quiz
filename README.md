@@ -119,7 +119,7 @@ However, sometimes you might want to return objects based on the values of their
 
 For example ```oq.quiz("*nested_object?data::number", "is.number")``` traverses the object to find the value of the key: **"..nested_object"**. It then picks the value of **"data.number"** from the object and checks that using *"is.js's"* **"is.number"** function. If true, then the entire object is returned as shown below.
 
-> NOte: The key can also use the wildcard to select nested keys. Example ```oq.quiz("*nested_object?*number", "is.number")```
+> Note: The key can also use the wildcard to select nested keys. Example ```oq.quiz("*nested_object?*number", "is.number")```
 
 ```
 [
