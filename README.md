@@ -81,7 +81,7 @@ This feature can be overridden through the options.
 
 # API
 
-## ```new OQ(YOUR_OBJECT [, options]);```
+### ```new OQ(YOUR_OBJECT [, options]);```
 Create a new instance and prepares the object for th quizzing.
 
 You can pass the following additional options:
@@ -89,7 +89,7 @@ You can pass the following additional options:
 - **separator:** defines the separator used to map your keys. Default is **"::"** hence your key-path should be written as **key::nested_level1::nested_array[0]...** and so on.
 - **caseSensitive:** determines whether key mapping is case sensitive. Default is **true**.
 
-## ```quiz(path [, check, expected])```
+### ```.quiz(path [, check, expected])```
 This is the main function that performs all the magic.
 
 - **path:** your object key-path. Required.
@@ -104,7 +104,7 @@ You can use any of these to check your object values.
 - **"has.size"** : ```eq.quiz("path", "has.size", 4)```
 
 
-### ```is.js Checkers```
+### is.js Checkers
 - **is.equal** : ```eq.quiz("path", "is.equal", "value")```
 - **is.not.equal** : ```eq.quiz("path", "is.not.equal", "value")```
 
