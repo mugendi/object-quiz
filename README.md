@@ -1,7 +1,7 @@
 [![The MIT License](https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square)](http://opensource.org/licenses/MIT)
+[![npm](https://img.shields.io/npm/v/package.svg?style=flat-square)](https://www.npmjs.org/package/package)
 [![npm](https://img.shields.io/npm/dm/object-quiz.svg?style=flat-square)](https://www.npmjs.org/package/object-quiz)
-[![GitHub](https://img.shields.io/github/issues/user/repository.svg?style=flat-square)](https://github.com/user/repository/issues)
-[![GitHub](https://img.shields.io/github/stars/user/repository.svg?style=flat-square)](https://github.com/user/repository)
+[![GitHub](https://img.shields.io/github/stars/mugendi/object-quiz.svg?style=flat-square)](https://github.com/mugendi/object-quiz)
 
 # Quick and easy JSON Queries
 When you need to query those deep JSON objects in over 300+ ways! just Quiz them!
