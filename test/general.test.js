@@ -23,4 +23,9 @@ test("Checks exact size of object", ()=>{
     expect(resp[0].length).toEqual(3);
 })
 
+test("Check by Key", ()=>{
+  let resp = oq.quiz("[4]?*email", "is.string");
+  expect(resp[0].phone).toEqual("+1 (958) 400-3636")
+})
+
 

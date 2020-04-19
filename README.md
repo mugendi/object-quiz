@@ -9,23 +9,32 @@ When you need to query those deep JSON objects in over 300+ ways! just Quiz them
 ```javascript
 let OQ = require("object-quiz");
 
-let obj = {
-    name: "awkward-object",
-    arr: [
+let obj = let obj = {
+  name: "awkward-object",
+  arr: [
     {
-        country: "Britain",
-        left: "E.U",
-        why: [  "politics", "desire", "independence",
-            {
-                what: "where?",
-                "what is this about": "go away",
-            },
-            "haha",
-        ],
-        population: ["66.65M", 66650000],
+      country: "Britain",
+      left: "E.U",
+      why: [ "politics", "desire", "independence",
+        {
+          what: "where?",
+          "what is this about": "go away",
+        },
+        "haha",
+      ],
+      population: ["66.65M", 66650000],
     },
-    ],
-};
+  ],
+  nested: {
+    object: {
+      bool: true,
+      data: {
+        type: "object",
+        number: 1,
+      },
+    },
+  },
+};;
 
 //initialize and pass object
 let oq = new OQ(obj);
@@ -55,8 +64,6 @@ This makes 300+ different checks immediately available to you!
 # Too much Talk?
 Here are more examples using the object above...
 
-## More Examples
-
 ```javascript
 ...
 ...
@@ -71,6 +78,9 @@ console.log(oq.quiz("arr[0]::population", "is.all.number")); //[]
 
 //difficult keys
 console.log(oq.quiz("*about")); //[ 'go away' ]
+
+//query by key
+console.log(oq.quiz("*object?data::number", "is.number")) //[ { bool:true, data:{...} } ]
 
 ```
 
@@ -96,6 +106,32 @@ This is the main function that performs all the magic.
 - **check:** Optional *is.js* function to check the value against. Please check out [the documentation](http://is.js.org/#number).
 - **expected:** Optional. Used for equality matches. This is the value that is checked against. 
 
+> Note: This function always returns an array of matches. An empty array means that no key matching your **path** is found or none of the values satisfy the **check** run on them.
+
+## Quizzing by Key
+The general structure of a key-path for your query looks like this:
+- ```path::nested_ath::more_nested```
+- ```path*::much_more_nested``` OR ```path*much_more_nested``` OR ```*much_more_nested```
+
+Once the value of the mapped key is found, it is checked against the "checker" passed and returned if the check resolves to **true**.
+
+However, sometimes you might want to return objects based on the values of their keys. To do so, you simply separate the object key-map and the key you are interested in checking with a question mark ("?").
+
+For example ```oq.quiz("*nested_object?data::number", "is.number")``` traverses the object to find the value of the key: **"..nested_object"**. It then picks the value of **"data.number"** from the object and checks that using *"is.js's"* **"is.number"** function. If true, then the entire object is returned as shown below.
+
+> NOte: The key can also use the wildcard to select nested keys. Example ```oq.quiz("*nested_object?*number", "is.number")```
+
+```
+[
+    {
+        "bool": true,
+        "data": {
+            "type": "object",
+            "number": 1
+        }
+    }
+]
+```
 # Available checkers 
 You can use any of these to check your object values.
 
