@@ -100,8 +100,8 @@ This is the main function that performs all the magic.
 You can use any of these to check your object values.
 
 ### Custom Checkers
-- **"it.contains"** : ```eq.quiz("path", "it.contains", "value")```
-- **"has.size"** : ```eq.quiz("path", "has.size", 4)```
+- **it.contains** : ```eq.quiz("path", "it.contains", "value")```
+- **has.size** : ```eq.quiz("path", "has.size", 4)```
 
 
 ### is.js Checkers
