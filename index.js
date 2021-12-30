@@ -1,154 +1,229 @@
-const isJs = require("is_js"),
-  Dot = require("./lib/dot-object");
+// Copyright 2021 Anthony Mugendi
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//     http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
 
-function oq(obj, options = {}) {
-  if (typeof obj !== "object") {
-    throw new Error(`${obj} must be an object`);
-  }
+const matcher = require('matcher'),
+	Dot = require('dot-object'),
+	dotSep = 'º¬',
+	dot1 = new Dot(dotSep),
+	dot2 = new Dot('_'),
+	is = Dot.dot(require('is_js')),
+	merge = require('deepmerge'),
+	{ keys, values } = Object;
 
-  if (typeof options !== "object") {
-    throw new Error(`${options} must be an object`);
-  }
+const arrIndexPat = /\[([0-9]+)\]/g,
+	beginningDotSep = new RegExp(`^${dotSep}`);
 
-  this.options = Object.assign(
-    { separator: "::", caseSensitive: true },
-    options
-  );
+class ObjQuiz {
+	constructor(obj) {
+		if (!is.object(obj))
+			throw new Error(
+				'You must pass an object while initializing this class'
+			);
 
-  let dot = new Dot(".");
+		this.flatten_obj(obj);
+	}
 
-  let availableFuncs = dot.dot({ is: isJs });
-  delete availableFuncs.VERSION;
-  delete availableFuncs.setNamespace;
-  delete availableFuncs.setRegexp;
+	flatten_obj(obj) {
+		this.obj = obj;
 
-  availableFuncs = Object.assign(
-    availableFuncs,
-    dot.dot(require("./lib/custom-functions"))
-  );
+		let o = dot1.dot(removeCircular(obj));
 
-  // console.log(availableFuncs);
+		let newKey;
+		for (let k in o) {
+			newKey = k
+				// add separators for each array index
+				.replace(arrIndexPat, `${dotSep}$1`)
+				// remove any leading dot sep
+				.replace(beginningDotSep, '');
 
-  dot = new Dot(this.options.separator);
-  this.obj = obj;
-  this.dot = dot;
-  this.funcs = availableFuncs;
+			// if key needs to change
+			if (newKey !== k) {
+				o[newKey] = o[k];
+				delete o[k];
+			}
+		}
 
-  this.dotObj = this.dot.dot(this.obj);
+		this.flatObj = o;
+	}
+
+	quiz(keyPattern, Check, val = null, parentLevel = 0) {
+		// console.log({ keyPattern, Check, val });
+
+		if (is.string(keyPattern) === false && is.array(keyPattern) === false)
+			throw new Error(`keyPattern argument must be a string or an array`);
+
+		// Get all keys for the flattened Object
+		let allKeys = all_flatted_keys(this.flatObj);
+
+		let allPatterns = arrify(keyPattern).map((keyPattern) =>
+				keyPattern.replace(/\./g, dotSep)
+			),
+			o = matcher(allKeys, allPatterns).reduce(
+				(a, b) => Object.assign(a, { [b]: dot1.pick(b, this.obj) }),
+				{}
+			);
+
+		// console.log('flatObj', this.flatObj);
+		// console.log({ allKeys, allPatterns });
+		// console.log({ o });
+
+    if(keys(o).length===0){
+      return {};
+    }
+
+		// return;
+
+		let isMethod;
+
+
+		if (Check) {
+
+			if (is.string(Check) === false)
+				throw new Error(
+					`Check argument must be a string. ${Check} (${typeof Check}) entered.`
+				);
+
+			Check = Check.trim();
+			// console.log(this.flatObj);
+			isMethod = Check.replace(/^is\./, '');
+
+			if (is.function(is[isMethod]) === false)
+				throw new Error(`${Check} is not a known type check`);
+		}
+
+    // console.log({o});
+
+		for (let k in o) {
+
+			// test is Check & remove values not matching
+			// console.log(isMethod, o[k], is[isMethod](o[k], val));
+
+			try {
+				if (Check && is[isMethod](o[k], val) === false) {
+					throw 'Not Found';
+				}
+			} catch (error) {
+				delete o[k];
+				continue;
+			}
+		}
+
+		let ks = get_key_parent(keys(o), parentLevel),
+			matchedDotObj = {},
+			v;
+
+		// console.log(ks);
+		// console.log(this.flatObj);
+		// console.log(Dot.pick('0.friends', this.obj));
+
+		for (let k of ks) {
+			v = dot1.object({ [k]: dot1.pick(k, this.obj) });
+
+			// console.log({k},  v);
+			matchedDotObj = merge(matchedDotObj, v);
+		}
+
+		return matchedDotObj;
+	}
 }
 
-oq.prototype.match_obj = function match_obj(obj, pathRegEXP, dotObj, path) {
-  let matches = [];
+function all_flatted_keys(obj) {
+	return Object.keys(obj)
+		.map((k) => {
+			let arr = k.split(dotSep);
+			let arr2 = [];
 
-  if (path == "[0-9]") {
-    console.log({ path, pathRegEXP });
-  }
+			while (arr.length > 0) {
+				arr2.push(arr.join(dotSep));
+				arr.pop();
+			}
 
-  // Find all matching keys
-  for (let key in dotObj) {
-    if ((m = key.match(pathRegEXP)) && matches.indexOf(m[1]) == -1) {
-      // if (path == '[0]') {
-      //   console.log(m);
-      // }
-      matches.push(m[1]);
-    }
-  }
-
-  // Map back to actual values
-  matches = matches.map((p) => this.dot.pick(p, obj));
-
-  return matches;
-};
-
-oq.prototype.quiz = function quiz(path, check, expected) {
-  // type check
-  if (typeof path !== "string") {
-    throw new Error(`"path" must be a string and not ${path}`);
-  }
-  if (check && typeof check !== "string") {
-    throw new Error(`"check" must be a string and not ${check}`);
-  }
-
-  let self = this,
-    { pathRegEXP, useKey } = self.path_to_regexp(path),
-    testedMatches = [];
-
-  let matches = this.match_obj(this.obj, pathRegEXP, this.dotObj, path);
-
-  // console.log({ path, pathRegEXP, useKey });
-
-  //perform required checks if we have some matches
-  if (check && matches && matches.length) {
-    // Ensure we are using a valid check...
-    // console.log({check}, self.funcs[check]);
-    if (self.funcs[check]) {
-      testedMatches = matches.filter((o) => {
-        // Use Key if set
-        let v = o;
-        if (useKey && o) {
-          v = this.match_obj(o, useKey, this.dot.dot(o)).shift();
-        }
-        //pass arguments as expected
-        if (["is.equal"].indexOf(check) > -1 || /(it|has)\./.test(check)) {
-          return self.funcs[check](v, expected);
-        } else if (/\.(any|all|sameType)/.test(check)) {
-          return self.funcs[check](...v);
-        } else {
-          return self.funcs[check](v);
-        }
-      });
-    }
-  } else if (matches && matches.length) {
-    testedMatches = matches;
-  }
-
-  return testedMatches;
-};
-
-oq.prototype.path_to_regexp = function path_to_regexp(path) {
-  let arr = path.split("?");
-
-  let resp = {
-    pathRegEXP: this.format_path(arr[0]),
-    useKey: this.format_path(arr[1]) || null,
-  };
-
-  // console.log(resp);
-
-  return resp;
-};
-
-oq.prototype.format_path = function path_to_regexp(path) {
-  //Ensure path is well formattedF
-  if (typeof path !== "string") return null;
-
-  path = path.replace(/::\*/g, "*").replace(/\*{2,}/, "*");
-
-  // Escape string just to be safe
-  path = escapeRegexp(path);
-
-  path = path
-    .replace(/\\\[\\\[:number:\\\]\\\]/g, "\\[[0-9]+\\]")
-    .replace(/\\?\*/g, "[\\w\\W]*")
-    //replace back terminating $
-    .replace(/\\\$$/, "");
-
-  //   console.log();
-
-  let pathRegEXP = new RegExp(
-    `^(${path})(.+)?`,
-    this.options.caseSensitive ? "" : "i"
-  );
-
-  return pathRegEXP;
-};
-
-function escapeRegexp(string) {
-  if (typeof string !== "string") {
-    throw new TypeError("Expected a string");
-  }
-
-  return string.replace(/[|\\{}()[\]^$+*?.]/g, "\\$&").replace(/-/g, "\\u002d");
+			// console.log(arr2);
+			return arr2;
+		})
+		.reduce((a, b) => a.concat(b), [])
+		.filter(onlyUnique);
 }
 
-module.exports = oq;
+function get_key_parent(ks, parentLevel = 0) {
+	let arr;
+
+	// parentLevel = -1;
+
+	ks = ks
+		.map((k) => {
+			// split key to get parent easily
+			arr = k.split(dotSep);
+
+			let level = 0;
+
+			// || arrIndexPat.test(last(arr))
+
+			if (parentLevel !== 0) {
+				//Return set parent level
+				// If that level is an array, then go up one more step
+				while (
+					(level < parentLevel ||
+						arrIndexPat.test(last(arr)) ||
+						parentLevel == -1) &&
+					arr.length > 1
+				) {
+					arr.pop();
+					level++;
+					// console.log({arr});
+				}
+			}
+
+			// return recombined path
+			return arr.join(dotSep);
+		})
+		.filter(onlyUnique);
+
+
+	return ks;
+}
+
+function last(arr) {
+	return arr[arr.length - 1];
+}
+
+function onlyUnique(value, index, self) {
+	return self.indexOf(value) === index;
+}
+
+function removeCircular(obj) {
+	// RETURN IMMEDIATELY if not object
+	if (!is.object(obj)) return obj;
+
+	const seen = new Map();
+	const recurse = (obj) => {
+		seen.set(obj, true);
+		if (is.object(obj)) {
+			for (let [k, v] of Object.entries(obj)) {
+				if (typeof v !== 'object') continue;
+				if (seen.has(v)) delete obj[k];
+				else recurse(v);
+			}
+		}
+	};
+	recurse(obj);
+
+	return obj;
+}
+
+function arrify(arr) {
+	return Array.isArray(arr) ? arr : [arr];
+}
+
+module.exports = ObjQuiz;
