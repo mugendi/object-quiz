@@ -2,37 +2,37 @@ const { method } = require('lodash');
 let OQ = require('.'),
 	util = require('util');
 
-function test1() {
-	let obj = {
-		name: 'awkward-object',
-		arr: [
-			{
-				country: 'Britain',
-				left: 'E.U',
-				why: [
-					'politics',
-					'desire',
-					'independence',
-					{
-						what: 'where?',
-						'what is this about': 'go away',
-					},
-					'haha',
-				],
-				population: ['66.65M', 66650000],
-			},
-		],
-		nested: {
-			object: {
-				bool: true,
-				data: {
-					type: 'object',
-					number: 1,
+let obj = {
+	name: 'awkward-object',
+	arr: [
+		{
+			country: 'Britain',
+			left: 'E.U',
+			why: [
+				'politics',
+				'desire',
+				'independence',
+				{
+					what: 'where?',
+					'what is this about': 'go away',
 				},
+				'haha',
+			],
+			population: ['66.65M', 66650000],
+		},
+	],
+	nested: {
+		object: {
+			bool: true,
+			data: {
+				type: 'object',
+				number: 1,
 			},
 		},
-	};
+	},
+};
 
+function test1() {
 	//initialize and pass object
 	let oq = new OQ(obj);
 
@@ -63,8 +63,7 @@ function test1() {
 }
 
 function test2() {
-	
-  let obj = {
+	let obj = {
 		// "is.array":{ obj: ['foo', 'bar', 'baz'] },
 		// "is.not_array":{ data: { foo: 'bar' } },
 
@@ -98,13 +97,15 @@ function test2() {
 		// "is.char":{ data: 'f' },
 		// "is.null":{ data: [null] },
 		// "is.sameType":{ data: 5, check: 4 },
-		'is_not_sameType': { data: 3, check: '45' },
+		is_not_sameType: { data: 3, check: '45' },
 	};
+
 	oq = new OQ(obj);
 
 	for (let key in obj) {
-		let resp, args,
-    check = key.replace(/_/g,'.')
+		let resp,
+			args,
+			check = key.replace(/_/g, '.');
 
 		args = [[`${key}.data*`, `${key}.obj`], check, obj[key].check];
 		resp = oq.quiz(...args);
@@ -114,5 +115,16 @@ function test2() {
 	}
 }
 
+function test3() {
+	//initialize and pass object
+	let oq = new OQ(obj);
 
-test1()
+	let resp;
+
+	// resp = oq.quiz('*country', 'is.equal', 'Britain')
+	resp = oq.short_quiz('*country,is.equal,Britain,1')
+
+	console.log(resp);
+}
+
+test3();

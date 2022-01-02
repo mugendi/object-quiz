@@ -16,9 +16,9 @@ const matcher = require('matcher'),
 	Dot = require('dot-object'),
 	dotSep = 'º¬',
 	dot1 = new Dot(dotSep),
-	dot2 = new Dot('_'),
 	is = Dot.dot(require('is_js')),
 	merge = require('deepmerge'),
+	stringVars = require('stringvars'),
 	{ keys, values } = Object;
 
 const arrIndexPat = /\[([0-9]+)\]/g,
@@ -78,17 +78,15 @@ class ObjQuiz {
 		// console.log({ allKeys, allPatterns });
 		// console.log({ o });
 
-    if(keys(o).length===0){
-      return {};
-    }
+		if (keys(o).length === 0) {
+			return {};
+		}
 
 		// return;
 
 		let isMethod;
 
-
 		if (Check) {
-
 			if (is.string(Check) === false)
 				throw new Error(
 					`Check argument must be a string. ${Check} (${typeof Check}) entered.`
@@ -102,10 +100,9 @@ class ObjQuiz {
 				throw new Error(`${Check} is not a known type check`);
 		}
 
-    // console.log({o});
+		// console.log({o});
 
 		for (let k in o) {
-
 			// test is Check & remove values not matching
 			// console.log(isMethod, o[k], is[isMethod](o[k], val));
 
@@ -135,6 +132,14 @@ class ObjQuiz {
 		}
 
 		return matchedDotObj;
+	}
+
+	short_quiz(query) {
+		// pick the last 3 args from the parsed string
+		let args = stringVars(query).slice(0, 4);
+
+		return this.quiz(...args);
+
 	}
 }
 
@@ -189,7 +194,6 @@ function get_key_parent(ks, parentLevel = 0) {
 			return arr.join(dotSep);
 		})
 		.filter(onlyUnique);
-
 
 	return ks;
 }

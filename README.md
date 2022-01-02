@@ -143,11 +143,6 @@ An array or patterns can also be passed.
 ### ```new OQ(YOUR_OBJECT [, options]);```
 Create a new instance and prepares the object for th quizzing.
 
-You can pass the following additional options:
-
-- **separator:** defines the separator used to map your keys. Default is **"::"** hence your key-path should be written as **key::nested_level1::nested_array[0]...** and so on.
-- **caseSensitive:** determines whether key mapping is case sensitive. Default is **true**.
-
 ### ```.quiz([keyPatterns] [, check, expectedValue, parentLevel])```
 This is the main function that performs all the magic.
 
@@ -156,35 +151,29 @@ This is the main function that performs all the magic.
 - **expectedValue:** Optional. Used for equality matches. This is the value that is checked against. 
 - **parentLevel:** Number of levels to traverse parent objects in order to return parent object. -1 Means traverse to the very root and 0 stops parent traversal. Default is 0
 
-> Note: This function always returns an array of matches. An empty array means that no key matching your **path** is found or none of the values satisfy the **check** run on them.
 
-## Quizzing by Key
-The general structure of a key-path for your query looks like this:
-- ```path::nested_ath::more_nested```
-- ```path*::much_more_nested``` OR ```path*much_more_nested``` OR ```*much_more_nested```
+## Using Shothand
+This module is currently being used to handle JSON queries that are defined by users. To ease the use, I created another module called [StringVars](https://www.npmjs.com/package/stringvars) that allows you to use a form of shorthand with your "Object Quizes"!
 
-Once the value of the mapped key is found, it is checked against the "checker" passed and returned if the check resolves to **true**.
+The shorthand is exposed via ```.short_quiz``` and can be used as shown below.
 
-However, sometimes you might want to return objects based on the values of their keys. To do so, you simply separate the object key-map and the key you are interested in checking with a question mark ("?").
+```javascript
+ let resp;
 
-For example ```oq.quiz("*nested_object?data::number", "is.number")``` traverses the object to find the value of the key: **"..nested_object"**. It then picks the value of **"data.number"** from the object and checks that using *"is.js's"* **"is.number"** function. If true, then the entire object is returned as shown below.
+// This query
+resp = oq.quiz('*country', 'is.equal', 'Britain',0)
+console.log(resp)
 
-> Note: The key can also use the wildcard to select nested keys. Example ```oq.quiz("*nested_object?*number", "is.number")```
+// is exactly the same as this
+resp = oq.short_quiz('*country,is.equal,Britain,0')  
+console.log(resp)
 
-```
-[
-    {
-        "bool": true,
-        "data": {
-            "type": "object",
-            "number": 1
-        }
-    }
-]
+// String Vars accurately type cases all values so they can be passed as arguments without throwing any errors
+
 ```
 
 
-### is.js Checkers
+## is.js Checkers
 All methods accepted my [is.js](http://is.js.org/#number) should work. 
 
-The same way you would write them while using **is.js** is the same way to write them wit **Object Quiz**.
+The same way you would use them while using **is.js** is the same way to use them with **Object Quiz**.
