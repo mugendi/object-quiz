@@ -116,20 +116,22 @@ class ObjQuiz {
 			}
 		}
 
+		// parentLevel = 1
 		let ks = get_key_parent(keys(o), parentLevel),
-			matchedDotObj = {},
-			v;
+			matchedDotObj = {},v,lastKey;
 
-		// console.log(ks);
+		// console.log({ks});
 		// console.log(this.flatObj);
 		// console.log(Dot.pick('0.friends', this.obj));
 
 		for (let k of ks) {
-			v = dot1.object({ [k]: dot1.pick(k, this.obj) });
-
-			// console.log({k},  v);
+			lastKey = k.split(dotSep).pop();
+			v = dot1.object({ [lastKey]: dot1.pick(k, this.obj) });
 			matchedDotObj = merge(matchedDotObj, v);
 		}
+
+		// console.log(this.obj);
+		// console.log(matchedDotObj);
 
 		return matchedDotObj;
 	}
@@ -144,7 +146,7 @@ class ObjQuiz {
 }
 
 function all_flatted_keys(obj) {
-	return Object.keys(obj)
+	let allKeys = Object.keys(obj)
 		.map((k) => {
 			let arr = k.split(dotSep);
 			let arr2 = [];
@@ -159,6 +161,8 @@ function all_flatted_keys(obj) {
 		})
 		.reduce((a, b) => a.concat(b), [])
 		.filter(onlyUnique);
+
+		return allKeys
 }
 
 function get_key_parent(ks, parentLevel = 0) {
