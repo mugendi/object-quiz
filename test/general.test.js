@@ -11,12 +11,12 @@ beforeAll(() => {
 
 test('Finds "Weaver Hodges"', () => {
   let resp = oq.quiz("*name", "is.include", "Weaver Hodges");
-  expect(keys(resp)).toEqual(["0"]);
+  expect(resp).toEqual({ name: 'Weaver Hodges' });
 });
 
 test('Checks if "Weaver Hodges" is friend', () => {
   let resp = oq.quiz("*friends*name", "is.include", "Weaver Hodges");
-  expect(keys(resp)).toEqual(["0"]);
+  expect(resp).toEqual({ name: 'Weaver Hodges' });
 });
 
 

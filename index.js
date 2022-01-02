@@ -136,7 +136,7 @@ class ObjQuiz {
 
 			// do not deep merge into existing key...
 			// instead make return value an array of values
-			if(lastKey in matchedDotObj){
+			if(lastKey in matchedDotObj && !is.object(matchedDotObj[lastKey]) ){
 				// console.log({lastKey});
 				matchedDotObj[lastKey] = arrify(matchedDotObj[lastKey])
 				matchedDotObj[lastKey].push(v[lastKey])
