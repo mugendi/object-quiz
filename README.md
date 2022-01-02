@@ -146,7 +146,7 @@ Create a new instance and prepares the object for th quizzing.
 ### ```.quiz([keyPatterns] [, check, expectedValue, parentLevel])```
 This is the main function that performs all the magic.
 
-- **keyPatterns:** your object key pattern. Required.
+- **keyPatterns:** Array/String of patterns to match the keys you wish to search for.
 - **check:** Optional *is.js* function to check the value against. Please check out [the documentation](http://is.js.org/#number).
 - **expectedValue:** Optional. Used for equality matches. This is the value that is checked against. 
 - **parentLevel:** Number of levels to traverse parent objects in order to return parent object. -1 Means traverse to the very root and 0 stops parent traversal. Default is 0

@@ -2982,6 +2982,11 @@ split-string@^3.0.1, split-string@^3.0.2:
   dependencies:
     extend-shallow "^3.0.0"
 
+split-string@^6.1.0:
+  version "6.1.0"
+  resolved "https://registry.yarnpkg.com/split-string/-/split-string-6.1.0.tgz#e9cedcf94cdab077d9b5528927894dec4b0f42ab"
+  integrity sha512-9UBdnmnvx2NLLd4bMs7CEKK+wSzbujVv3ONyorkP1o8M3pVJQtXDO1cN19xD1JJs6ltOrtPrkUND0HzLSinUcA==
+
 sprintf-js@~1.0.2:
   version "1.0.3"
   resolved "https://registry.yarnpkg.com/sprintf-js/-/sprintf-js-1.0.3.tgz#04e6926f662895354f3dd015203633b857297e2c"
@@ -3037,10 +3042,12 @@ string-width@^4.1.0, string-width@^4.2.0:
     is-fullwidth-code-point "^3.0.0"
     strip-ansi "^6.0.0"
 
-stringvars@^1.0.0:
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/stringvars/-/stringvars-1.0.0.tgz#16679d95d62330ffff6f4ff86c4d9f87f5dd4c88"
-  integrity sha512-Rm5sJC6ML6qgVhiEDVCoQXHTOvIA3ITM945C41WG2nSzBDk8NAbKWOB/5Og6zzp/IB7XJNVrsanrw83LPim3Mw==
+stringvars@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/stringvars/-/stringvars-1.0.1.tgz#fb152ddbfa1205da4b479688a5677873cb01de89"
+  integrity sha512-WUh6h5ImRm+Flar/hG3w+pS7etdzet3bcTDA4kbkSKQeLCz4fN7fuV/T0sNJGnSJ1pRod6oeEBrnCd3BFAV3qA==
+  dependencies:
+    split-string "^6.1.0"
 
 strip-ansi@^5.2.0:
   version "5.2.0"

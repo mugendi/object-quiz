@@ -66,13 +66,18 @@ class ObjQuiz {
 		// Get all keys for the flattened Object
 		let allKeys = all_flatted_keys(this.flatObj);
 
-		let allPatterns = arrify(keyPattern).map((keyPattern) =>
+		let allPatterns = arrify(keyPattern).filter(onlyUnique).map((keyPattern) =>
 				keyPattern.replace(/\./g, dotSep)
 			),
-			o = matcher(allKeys, allPatterns).reduce(
+			matchedKeys = matcher(allKeys, allPatterns).filter(onlyUnique),
+			o = matchedKeys.reduce(
 				(a, b) => Object.assign(a, { [b]: dot1.pick(b, this.obj) }),
 				{}
 			);
+
+
+			// console.log({allKeys, allPatterns});
+			// console.log(matchedKeys);
 
 		// console.log('flatObj', this.flatObj);
 		// console.log({ allKeys, allPatterns });
@@ -126,12 +131,25 @@ class ObjQuiz {
 
 		for (let k of ks) {
 			lastKey = k.split(dotSep).pop();
+
 			v = dot1.object({ [lastKey]: dot1.pick(k, this.obj) });
-			matchedDotObj = merge(matchedDotObj, v);
+
+			// do not deep merge into existing key...
+			// instead make return value an array of values
+			if(lastKey in matchedDotObj){
+				// console.log({lastKey});
+				matchedDotObj[lastKey] = arrify(matchedDotObj[lastKey])
+				matchedDotObj[lastKey].push(v[lastKey])
+			}
+			else{
+				matchedDotObj = merge(matchedDotObj, v);
+			}
+
+			
 		}
 
 		// console.log(this.obj);
-		// console.log(matchedDotObj);
+		// console.log({matchedDotObj});
 
 		return matchedDotObj;
 	}
